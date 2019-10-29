@@ -43,7 +43,9 @@ module.exports = {
           active: false,
           summary: []
         },
-        notesPosition: 'footnotes'
+        notesPosition: 'footnotes',
+        displayHeader: true,
+        displayThumbnail: false
       },
       properties: {
         customTitle: {
@@ -61,6 +63,14 @@ module.exports = {
         hideEmptyResources: {
           type: 'boolean',
           description: 'whether to hide resources with no contents'
+        },
+        displayHeader: {
+          type: 'boolean',
+          description: 'whether to display resources headers in their views'
+        },
+        displayThumbnail: {
+          type: 'boolean',
+          description: 'whether to display resources previews in lists'
         },
         customSummary: {
           type: 'object',

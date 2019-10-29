@@ -1,46 +1,22 @@
 import React from 'react';
 import Link from './LinkProvider';
 import {
-  defaultSortResourceSections,
   getResourceTitle,
-  resourceHasContents,
+  buildResourceSectionsSummary
 } from 'peritext-utils';
 
-const ellipse = ( str, max = 50 ) => {
-  if ( str.length > max )
-    return `${str.substr( 0, max - 3 ) }...`;
-  return str;
-};
+import {
+  ellipse,
+} from '../utils';
+
+import ResourcePreview from './ResourcePreview';
 
 const SectionsList = ( {
   production,
-  // edition,
   options,
 } ) => {
-  const { customSummary, resourceTypes, notesPosition, hideEmptyResources = false } = options;
-
-  let summary = [];
-  if ( customSummary && customSummary.active ) {
-    summary = customSummary.summary;
-  }
- else {
-    summary = Object.keys( production.resources )
-    .filter( ( resourceId ) => {
-      const resource = production.resources[resourceId];
-      return resourceTypes.includes( resource.metadata.type );
-    } )
-    .filter( ( resourceId ) => {
-      if ( hideEmptyResources ) {
-        return resourceHasContents( production.resources[resourceId] );
-      }
-      return true;
-    } )
-    .map( ( resourceId ) => ( {
-      resourceId,
-      level: 0
-    } ) )
-    .sort( defaultSortResourceSections );
-  }
+  const { notesPosition, displayThumbnail = false, displayHeader = false } = options;
+  const summary = buildResourceSectionsSummary( { production, options } );
   return (
     <section className={ 'main-contents-container sections-list' }>
       <ul>
@@ -61,9 +37,14 @@ const SectionsList = ( {
                     previousResourceId,
                     nextResourceId,
                     notesPosition,
+                    displayHeader,
                   }
                 } }
                 >
+                  {
+                    displayThumbnail &&
+                    <ResourcePreview resource={ thatResource } />
+                  }
                   <h2>{ellipse( getResourceTitle( thatResource ) )}</h2>
                   {
                     thatResource.metadata.authors &&

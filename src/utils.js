@@ -6,6 +6,12 @@ import {
 
 import { makeBibliography } from 'react-citeproc';
 
+export const ellipse = ( str, max = 50 ) => {
+  if ( str.length > max )
+    return `${str.substr( 0, max - 3 ) }...`;
+  return str;
+};
+
 export const makeAssetTitle = ( resource, production, edition, citations ) => {
   const type = resource.metadata.type;
   switch ( type ) {

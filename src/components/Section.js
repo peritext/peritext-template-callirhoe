@@ -9,6 +9,7 @@ import NotesContainer from './NotesContainer';
 import Renderer from './Renderer';
 import SectionHead from './SectionHead';
 import InternalLink from './LinkProvider';
+import ResourcePreview from './ResourcePreview';
 
 class Section extends Component {
 
@@ -83,6 +84,7 @@ class Section extends Component {
       previousResourceId,
       nextResourceId,
       notesPosition = 'footnotes',
+      displayHeader = false
     } = activeViewParams;
 
     const {
@@ -130,6 +132,10 @@ class Section extends Component {
           <h1 className={ 'view-title section-title' }>
             {getResourceTitle( section ) || ( translate( 'untitled section' ) || 'Section sans titre' )}
           </h1>
+          {
+            displayHeader &&
+            <ResourcePreview resource={ section } />
+          }
           {section.metadata.subtitle && <h2 className={ 'subtitle' }>{section.metadata.subtitle}</h2>}
           {sectionAuthors.length > 0 &&
           <h2 className={ 'authors' }>
@@ -164,7 +170,11 @@ class Section extends Component {
             {previousResource &&
             <li className={ 'prev' }>
               <InternalLink
-                to={ { routeClass: 'resourcePage', viewId: 'nope', routeParams: { resourceId: previousResource.id } } }
+                to={ { routeClass: 'resourcePage', viewId: 'nope', routeParams: {
+                  resourceId: previousResource.id,
+                  notesPosition,
+                  displayHeader,
+                } } }
               >
                 <span className={ 'navigation-item' }>
                   <span className={ 'navigation-item-arrow' }>←</span>
@@ -182,7 +192,11 @@ class Section extends Component {
             {nextResource &&
             <li className={ 'next' }>
               <InternalLink
-                to={ { routeClass: 'resourcePage', viewId: 'nope', routeParams: { resourceId: nextResource.id } } }
+                to={ { routeClass: 'resourcePage', viewId: 'nope', routeParams: {
+                  resourceId: nextResource.id,
+                  notesPosition,
+                  displayHeader,
+                } } }
               >
                 <span className={ 'navigation-item' }>
                   <span className={ 'navigation-item-text' }>{abbrevString( getResourceTitle( nextResource ), 40 ) }</span>

@@ -105,7 +105,7 @@ const routeItemToUrl = (item, index) => {
       return `/list/${item.routeParams.elementId}`;
 
     case 'resourcePage':
-      const additional = ['previousResourceId', 'nextResourceId', 'notesPosition'].reduce((res, key) => `${res}${item.routeParams[key] ? `&${key}=${item.routeParams[key]}` : ''}`, '');
+      const additional = ['previousResourceId', 'nextResourceId', 'notesPosition', 'displayHeader'].reduce((res, key) => `${res}${item.routeParams[key] ? `&${key}=${item.routeParams[key]}` : ''}`, '');
       return `/resource?resourceId=${item.routeParams.resourceId}&mode=screen${additional}`;
 
     default:
@@ -425,14 +425,28 @@ class Wrapper extends _react.Component {
       path: '/resource',
       component: props => {
         const search = props.history.location.search || '';
+
+        const normalizeVal = val => {
+          if (!isNaN(+val)) {
+            return +val;
+          } else if (val === 'true') {
+            return true;
+          } else if (val === 'false') {
+            return false;
+          }
+
+          return val;
+        };
+
         const searchParams = search.slice(1).split('&').map(str => str.split('=')).reduce((result, tuple) => _objectSpread({}, result, {
-          [tuple[0]]: tuple[1]
+          [tuple[0]]: normalizeVal(tuple[1])
         }), {});
         const {
           resourceId,
           previousResourceId,
           nextResourceId,
-          notesPosition
+          notesPosition,
+          displayHeader
         } = searchParams;
         return renderView({
           viewClass: 'resourcePage',
@@ -440,7 +454,8 @@ class Wrapper extends _react.Component {
             resourceId,
             previousResourceId,
             nextResourceId,
-            notesPosition
+            notesPosition,
+            displayHeader
           },
           navSummary,
           viewNavSummaryIndex

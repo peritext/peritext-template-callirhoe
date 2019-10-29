@@ -11,44 +11,25 @@ var _LinkProvider = _interopRequireDefault(require("./LinkProvider"));
 
 var _peritextUtils = require("peritext-utils");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _utils = require("../utils");
 
-const ellipse = (str, max = 50) => {
-  if (str.length > max) return `${str.substr(0, max - 3)}...`;
-  return str;
-};
+var _ResourcePreview = _interopRequireDefault(require("./ResourcePreview"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const SectionsList = ({
   production,
-  // edition,
   options
 }) => {
   const {
-    customSummary,
-    resourceTypes,
     notesPosition,
-    hideEmptyResources = false
+    displayThumbnail = false,
+    displayHeader = false
   } = options;
-  let summary = [];
-
-  if (customSummary && customSummary.active) {
-    summary = customSummary.summary;
-  } else {
-    summary = Object.keys(production.resources).filter(resourceId => {
-      const resource = production.resources[resourceId];
-      return resourceTypes.includes(resource.metadata.type);
-    }).filter(resourceId => {
-      if (hideEmptyResources) {
-        return (0, _peritextUtils.resourceHasContents)(production.resources[resourceId]);
-      }
-
-      return true;
-    }).map(resourceId => ({
-      resourceId,
-      level: 0
-    })).sort(_peritextUtils.defaultSortResourceSections);
-  }
-
+  const summary = (0, _peritextUtils.buildResourceSectionsSummary)({
+    production,
+    options
+  });
   return _react.default.createElement("section", {
     className: 'main-contents-container sections-list'
   }, _react.default.createElement("ul", null, summary.map(({
@@ -67,10 +48,13 @@ const SectionsList = ({
           resourceId,
           previousResourceId,
           nextResourceId,
-          notesPosition
+          notesPosition,
+          displayHeader
         }
       }
-    }, _react.default.createElement("h2", null, ellipse((0, _peritextUtils.getResourceTitle)(thatResource))), thatResource.metadata.authors && _react.default.createElement("p", null, thatResource.metadata.authors.map(({
+    }, displayThumbnail && _react.default.createElement(_ResourcePreview.default, {
+      resource: thatResource
+    }), _react.default.createElement("h2", null, (0, _utils.ellipse)((0, _peritextUtils.getResourceTitle)(thatResource))), thatResource.metadata.authors && _react.default.createElement("p", null, thatResource.metadata.authors.map(({
       family,
       given
     }, thatIndex) => _react.default.createElement("span", {

@@ -24,7 +24,7 @@ export const buildNav = ( { /*production,*/ edition = {}, locale = {}, translate
     return summary.reduce( ( result, element ) => {
       switch ( element.type ) {
           case 'resourceSections':
-              return [
+            return [
                 ...result,
                 {
                   routeClass: 'sectionsList',
@@ -66,7 +66,7 @@ export const routeItemToUrl = ( item, index ) => {
     case 'sectionsList':
       return `/list/${item.routeParams.elementId}`;
     case 'resourcePage':
-      const additional = [ 'previousResourceId', 'nextResourceId', 'notesPosition' ]
+      const additional = [ 'previousResourceId', 'nextResourceId', 'notesPosition', 'displayHeader' ]
       .reduce( ( res, key ) => `${res}${item.routeParams[key] ? `&${key}=${item.routeParams[key]}` : ''}`, '' );
       return `/resource?resourceId=${item.routeParams.resourceId}&mode=screen${additional}`;
     default:
@@ -377,18 +377,31 @@ export default class Wrapper extends Component {
               path={ '/resource' }
               component={ ( props ) => {
                   const search = props.history.location.search || '';
+                  const normalizeVal = ( val ) => {
+                    if ( !isNaN( +val ) ) {
+                      return +val;
+                    }
+                     else if ( val === 'true' ) {
+                      return true;
+                    }
+                    else if ( val === 'false' ) {
+                      return false;
+                    }
+                    return val;
+                  };
                   const searchParams = search.slice( 1 ).split( '&' ).map( ( str ) => str.split( '=' ) ).reduce( ( result, tuple ) => ( {
                     ...result,
-                    [tuple[0]]: tuple[1],
+                    [tuple[0]]: normalizeVal( tuple[1] ),
                   } ), {} );
-                  const { resourceId, previousResourceId, nextResourceId, notesPosition } = searchParams;
+                  const { resourceId, previousResourceId, nextResourceId, notesPosition, displayHeader } = searchParams;
                   return renderView( {
                     viewClass: 'resourcePage',
                     viewParams: {
                       resourceId,
                       previousResourceId,
                       nextResourceId,
-                      notesPosition
+                      notesPosition,
+                      displayHeader,
                     }, navSummary, viewNavSummaryIndex } );
                 }
               }

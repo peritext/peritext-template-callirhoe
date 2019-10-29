@@ -21,6 +21,8 @@ var _SectionHead = _interopRequireDefault(require("./SectionHead"));
 
 var _LinkProvider = _interopRequireDefault(require("./LinkProvider"));
 
+var _ResourcePreview = _interopRequireDefault(require("./ResourcePreview"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
@@ -82,7 +84,8 @@ class Section extends _react.Component {
       const {
         previousResourceId,
         nextResourceId,
-        notesPosition = 'footnotes'
+        notesPosition = 'footnotes',
+        displayHeader = false
       } = activeViewParams;
       const {
         data: editionData = {}
@@ -119,7 +122,9 @@ class Section extends _react.Component {
         className: 'main-column'
       }, _react.default.createElement("h1", {
         className: 'view-title section-title'
-      }, (0, _peritextUtils.getResourceTitle)(section) || translate('untitled section') || 'Section sans titre'), section.metadata.subtitle && _react.default.createElement("h2", {
+      }, (0, _peritextUtils.getResourceTitle)(section) || translate('untitled section') || 'Section sans titre'), displayHeader && _react.default.createElement(_ResourcePreview.default, {
+        resource: section
+      }), section.metadata.subtitle && _react.default.createElement("h2", {
         className: 'subtitle'
       }, section.metadata.subtitle), sectionAuthors.length > 0 && _react.default.createElement("h2", {
         className: 'authors'
@@ -146,7 +151,9 @@ class Section extends _react.Component {
           routeClass: 'resourcePage',
           viewId: 'nope',
           routeParams: {
-            resourceId: previousResource.id
+            resourceId: previousResource.id,
+            notesPosition,
+            displayHeader
           }
         }
       }, _react.default.createElement("span", {
@@ -162,7 +169,9 @@ class Section extends _react.Component {
           routeClass: 'resourcePage',
           viewId: 'nope',
           routeParams: {
-            resourceId: nextResource.id
+            resourceId: nextResource.id,
+            notesPosition,
+            displayHeader
           }
         }
       }, _react.default.createElement("span", {
