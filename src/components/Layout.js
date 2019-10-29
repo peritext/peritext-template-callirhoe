@@ -395,7 +395,9 @@ class Layout extends Component {
     const citationStyle = edition.data.citationStyle.data;
     const citationLocale = edition.data.citationLocale.data;
     const globalTitle = edition.data.publicationTitle && edition.data.publicationTitle.length ? edition.data.publicationTitle : production.metadata.title;
-
+    const globalSubtitle = edition.data.publicationSubtitle && edition.data.publicationSubtitle.length ? edition.data.publicationSubtitle : production.metadata.subtitle;
+    const globalDescription = production.metadata.abstract;
+    const globalAuthors = edition.data.authors && edition.data.authors.length ? edition.data.authors : production.metadata.authors;
     const editionAsCSLRecord = convertEditionToCslRecord( production, edition );
     const bindGlobalScrollbarRef = ( scrollbar ) => {
       this.globalScrollbar = scrollbar;
@@ -439,6 +441,9 @@ class Layout extends Component {
               inTop={ inTop }
               summary={ summary }
               title={ globalTitle }
+              subtitle={ globalSubtitle }
+              description={ globalDescription }
+              authors={ globalAuthors }
             />
           </section>
             : // config for server-side rendering (no scrollbars)

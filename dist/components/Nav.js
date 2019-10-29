@@ -17,7 +17,10 @@ const Nav = ({
   summary = [],
   toggleIndex,
   locationTitle,
-  title
+  title,
+  subtitle,
+  description,
+  authors
 }, {
   LinkComponent
 }) => {
@@ -48,6 +51,19 @@ const Nav = ({
     onClick: toggleIndex,
     className: 'location-title'
   }, (0, _peritextUtils.abbrevString)(locationTitle, 60)))), _react.default.createElement("div", {
+    className: 'additional-header'
+  }, subtitle && _react.default.createElement("h2", {
+    className: 'subtitle'
+  }, subtitle), authors && authors.length ? _react.default.createElement("h3", {
+    className: 'authors'
+  }, authors.map(({
+    given,
+    family
+  }, index) => _react.default.createElement("span", {
+    key: index
+  }, given, " ", family))) : null, description && _react.default.createElement("p", {
+    className: 'description'
+  }, description)), _react.default.createElement("div", {
     className: 'nav-content-container'
   }, _react.default.createElement("ul", null, realSummary.map((item, index) => {
     return _react.default.createElement("li", {

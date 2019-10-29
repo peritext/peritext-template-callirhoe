@@ -358,6 +358,9 @@ class Layout extends _react.Component {
       const citationStyle = edition.data.citationStyle.data;
       const citationLocale = edition.data.citationLocale.data;
       const globalTitle = edition.data.publicationTitle && edition.data.publicationTitle.length ? edition.data.publicationTitle : production.metadata.title;
+      const globalSubtitle = edition.data.publicationSubtitle && edition.data.publicationSubtitle.length ? edition.data.publicationSubtitle : production.metadata.subtitle;
+      const globalDescription = production.metadata.abstract;
+      const globalAuthors = edition.data.authors && edition.data.authors.length ? edition.data.authors : production.metadata.authors;
       const editionAsCSLRecord = (0, _utils.convertEditionToCslRecord)(production, edition);
 
       const bindGlobalScrollbarRef = scrollbar => {
@@ -393,7 +396,10 @@ class Layout extends _react.Component {
         locationTitle: locationTitle,
         inTop: inTop,
         summary: summary,
-        title: globalTitle
+        title: globalTitle,
+        subtitle: globalSubtitle,
+        description: globalDescription,
+        authors: globalAuthors
       })) : // config for server-side rendering (no scrollbars)
       _react.default.createElement("section", {
         className: `callirhoe-layout has-view-class-${viewClass} ${asideVisible ? 'has-aside-visible' : ''} ${indexOpen ? 'has-index-open' : ''}`

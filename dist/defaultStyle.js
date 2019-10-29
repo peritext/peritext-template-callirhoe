@@ -117,7 +117,8 @@ button{
   max-height: var(--mobile-nav-head-height);
   overflow: hidden;
 }
-.callirhoe-layout .nav-header{
+.callirhoe-layout .nav-header
+{
   min-height: var(--mobile-nav-head-height);
   max-height: var(--mobile-nav-head-height);
   display: flex;
@@ -126,7 +127,6 @@ button{
   background: var(--color-background);
   align-items: center;
   margin-top: 0;
-
 }
 .callirhoe-layout .nav-header .title {
   flex: 1;
@@ -138,17 +138,39 @@ button{
   justify-content: stretch;
 }
 .callirhoe-layout .nav-header .title,
+.callirhoe-layout .additional-header,
 .callirhoe-layout .nav-content-container{
   margin-left: calc(var(--content-margin-width) - var(--gutter-medium) * 2);  
 }
-.callirhoe-layout .nav-header .title{
+.callirhoe-layout .nav-header .title,
+.callirhoe-layout .additional-header
+{
   margin-right: calc(var(--content-margin-width) - var(--gutter-medium) * 2);  
+}
 
+.callirhoe-layout .additional-header .subtitle,
+.callirhoe-layout .additional-header .authors,
+.callirhoe-layout .additional-header .description{
+  padding-left: calc(var(--gutter-medium) * 2);
+} 
+
+.callirhoe-layout .additional-header .subtitle
+{
+  font-size: 1.2rem;
+}
+.callirhoe-layout .additional-header .authors
+{
+  font-size: 1rem;
+  font-style: italic;
+}
+.callirhoe-layout .additional-header .description{
+  font-size: .8rem;
 }
 .callirhoe-layout .nav-header .title .location-title{
   flex: 1;
   padding-top: .4rem;
 }
+
 .callirhoe-layout .nav-content-container{
   overflow-y: auto;
   max-height: calc(100% - var(--mobile-nav-head-height) * 2);
@@ -325,6 +347,16 @@ button{
   .callirhoe-layout .nav-header .title{
     font-size: 1.3rem;
     margin-bottom: var(--gutter-medium);
+  }
+
+  .callirhoe-layout .additional-header,
+  .callirhoe-layout .additional-header .subtitle,
+  .callirhoe-layout .additional-header .description,
+  .callirhoe-layout .additional-header .authors
+  {
+    margin: 0;
+    padding: 0;
+    padding-bottom: .5rem;
   }
 
   /* do not display location as it is always visible */

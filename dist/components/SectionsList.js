@@ -26,7 +26,8 @@ const SectionsList = ({
   const {
     customSummary,
     resourceTypes,
-    notesPosition
+    notesPosition,
+    hideEmptyResources = false
   } = options;
   let summary = [];
 
@@ -36,6 +37,12 @@ const SectionsList = ({
     summary = Object.keys(production.resources).filter(resourceId => {
       const resource = production.resources[resourceId];
       return resourceTypes.includes(resource.metadata.type);
+    }).filter(resourceId => {
+      if (hideEmptyResources) {
+        return (0, _peritextUtils.resourceHasContents)(production.resources[resourceId]);
+      }
+
+      return true;
     }).map(resourceId => ({
       resourceId,
       level: 0

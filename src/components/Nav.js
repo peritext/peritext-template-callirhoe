@@ -5,7 +5,10 @@ const Nav = ( {
   summary = [],
   toggleIndex,
   locationTitle,
-  title
+  title,
+  subtitle,
+  description,
+  authors,
 }, { LinkComponent } ) => {
   const realSummary = summary.filter( ( v ) => v.routeClass !== 'landing' );
   const landingView = summary.find( ( v ) => v.routeClass === 'landing' );
@@ -42,6 +45,29 @@ const Nav = ( {
           }
         </h1>
 
+      </div>
+      <div className={ 'additional-header' }>
+        {
+            subtitle &&
+            <h2 className={ 'subtitle' }>
+              {subtitle}
+            </h2>
+          }
+        {
+            authors && authors.length ?
+              <h3 className={ 'authors' }>
+                {
+                authors.map( ( { given, family }, index ) => <span key={ index }>{given} {family}</span> )
+              }
+              </h3>
+            : null
+          }
+        {
+            description &&
+            <p className={ 'description' }>
+              {description}
+            </p>
+          }
       </div>
       <div className={ 'nav-content-container' }>
         <ul>
