@@ -59,6 +59,10 @@ module.exports = {
           uiType: 'select',
           description: 'which types of resources to show'
         },
+        hideEmptyResources: {
+          type: 'boolean',
+          description: 'whether to hide resources with no contents'
+        },
         customSummary: {
           type: 'object',
           uiType: 'customResourcesSummary',

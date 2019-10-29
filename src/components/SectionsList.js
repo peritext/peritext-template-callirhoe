@@ -3,6 +3,7 @@ import Link from './LinkProvider';
 import {
   defaultSortResourceSections,
   getResourceTitle,
+  resourceHasContents,
 } from 'peritext-utils';
 
 const ellipse = ( str, max = 50 ) => {
@@ -16,7 +17,7 @@ const SectionsList = ( {
   // edition,
   options,
 } ) => {
-  const { customSummary, resourceTypes, notesPosition } = options;
+  const { customSummary, resourceTypes, notesPosition, hideEmptyResources = false } = options;
 
   let summary = [];
   if ( customSummary && customSummary.active ) {
@@ -27,6 +28,12 @@ const SectionsList = ( {
     .filter( ( resourceId ) => {
       const resource = production.resources[resourceId];
       return resourceTypes.includes( resource.metadata.type );
+    } )
+    .filter( ( resourceId ) => {
+      if ( hideEmptyResources ) {
+        return resourceHasContents( production.resources[resourceId] );
+      }
+      return true;
     } )
     .map( ( resourceId ) => ( {
       resourceId,
