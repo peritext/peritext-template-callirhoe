@@ -17,7 +17,7 @@ module.exports = {
     }
   },
   defaultBibType: 'misc',
-  defaultAdditionalHTML: '<link href="<link href="https://fonts.googleapis.com/css?family=Work+Sans&display=swap" rel="stylesheet">" rel="stylesheet">',
+  defaultAdditionalHTML: '<link href="https://fonts.googleapis.com/css?family=Work+Sans&display=swap" rel="stylesheet">',
   defaultPlan: {
       type: 'linear',
       summary: [
