@@ -5,6 +5,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 const styles = `
+
+
 /**
  * DOCUMENTATION
 
@@ -165,6 +167,8 @@ button{
 }
 .callirhoe-layout .additional-header .description{
   font-size: .8rem;
+  max-height: 30vh;
+  overflow-y: auto;
 }
 .callirhoe-layout .nav-header .title .location-title{
   flex: 1;
@@ -289,10 +293,10 @@ button{
   .callirhoe-layout .main-container{
     width: 100%;
   }
-  .callirhoe-layout .main-contents-container,
-  .callirhoe-layout .navigation-footer{
-    padding-right: calc(100% - var(--tablet-main-width));
-  }
+  // .callirhoe-layout .main-contents-container,
+  // .callirhoe-layout .navigation-footer{
+  //   padding-right: calc(100% - var(--tablet-main-width));
+  // }
 
   .callirhoe-layout.has-aside-visible .main-container{
     left: 0;
@@ -397,10 +401,10 @@ button{
   .callirhoe-layout .view-title{
     display: block;
   }
-  .callirhoe-layout .main-contents-container,
-  .callirhoe-layout .navigation-footer{
-    padding-right: calc(var(--desktop-aside-width) * 1.3);
-  }
+  // .callirhoe-layout .main-contents-container,
+  // .callirhoe-layout .navigation-footer{
+  //   padding-right: calc(var(--desktop-aside-width) * 1.3);
+  // }
 
   .callirhoe-layout.has-aside-visible .main-container{
     left: var(--desktop-nav-width);
@@ -636,8 +640,8 @@ h1{
 .block-contextualization-container img
 {
   max-width: 100%;
-  max-height: 80vh;
-  min-height: 40vh;
+  // max-height: 80vh;
+  // min-height: 40vh;
 }
 .block-contextualization-container iframe
 {
@@ -1280,6 +1284,10 @@ h1{
   padding-right: var(--gutter-medium);
 }
 
+.sections-list{
+  padding-left: var(--mobile-nav-head-height)
+}
+
 .sections-list ul{
   padding: 0;
   list-style: none;
@@ -1288,18 +1296,35 @@ h1{
 }
 
 .resource-card{
-  margin: 1rem;
-  padding: 1rem;
+  margin: .2rem;
+  padding: .5rem;
   border: 1px solid lightgrey;
   cursor: pointer;
-  min-width: 100%;
-  max-width: 100%;
+  min-width: 30%;
+   max-width: 30%;
   overflow: hidden;
+  min-height: 30vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
+
+.resource-card-title{
+  font-size: 1rem;
+  margin: 0;
+  margin-top: .5rem;
+}
+
+.resource-card img{
+  max-height: 15vw;
+}
+
 @media screen and (min-width: 1224px) {
   .resource-card{
-    min-width: 42%;
-    max-width: 42%;
+    min-width: 20%;
+   max-width: 20%;
+    
   }
 }
 

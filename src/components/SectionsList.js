@@ -45,7 +45,7 @@ const SectionsList = ( {
                     displayThumbnail &&
                     <ResourcePreview resource={ thatResource } />
                   }
-                  <h2>{ellipse( getResourceTitle( thatResource ) )}</h2>
+                  <h2 className={ 'resource-card-title' }>{ellipse( getResourceTitle( thatResource ), 100 )}</h2>
                   {
                     thatResource.metadata.authors &&
                     <p>

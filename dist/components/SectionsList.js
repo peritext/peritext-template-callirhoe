@@ -54,7 +54,9 @@ const SectionsList = ({
       }
     }, displayThumbnail && _react.default.createElement(_ResourcePreview.default, {
       resource: thatResource
-    }), _react.default.createElement("h2", null, (0, _utils.ellipse)((0, _peritextUtils.getResourceTitle)(thatResource))), thatResource.metadata.authors && _react.default.createElement("p", null, thatResource.metadata.authors.map(({
+    }), _react.default.createElement("h2", {
+      className: 'resource-card-title'
+    }, (0, _utils.ellipse)((0, _peritextUtils.getResourceTitle)(thatResource), 100)), thatResource.metadata.authors && _react.default.createElement("p", null, thatResource.metadata.authors.map(({
       family,
       given
     }, thatIndex) => _react.default.createElement("span", {
