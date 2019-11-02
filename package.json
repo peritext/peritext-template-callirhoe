@@ -19,9 +19,9 @@
   "author": "Robin de Mourat",
   "license": "AGPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/peritext/peritext-template-deucalion/issues"
+    "url": "https://github.com/peritext/peritext-template-callirhoe/issues"
   },
-  "homepage": "https://github.com/peritext/peritext-template-deucalion#readme",
+  "homepage": "https://github.com/peritext/peritext-template-callirhoe#readme",
   "peerDependencies": {
     "react": "^16.7.0-alpha",
     "react-dom": "^16.7.0-alpha",
