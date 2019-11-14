@@ -289,6 +289,7 @@ export default class Wrapper extends Component {
          edition,
          previewMode,
          useBrowserRouter = false,
+         preprocessedData,
        },
        state: {
         viewId,
@@ -310,6 +311,7 @@ export default class Wrapper extends Component {
           edition={ edition }
           viewId={ viewId }
           viewClass={ viewClass }
+          preprocessedData={ preprocessedData }
         >
           {renderView( { viewId, viewClass, viewParams, navSummary, viewNavSummaryIndex } )}
         </Layout>

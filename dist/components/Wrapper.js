@@ -348,7 +348,8 @@ class Wrapper extends _react.Component {
         production,
         edition,
         previewMode,
-        useBrowserRouter = false
+        useBrowserRouter = false,
+        preprocessedData
       },
       state: {
         viewId,
@@ -367,7 +368,8 @@ class Wrapper extends _react.Component {
         production: production,
         edition: edition,
         viewId: viewId,
-        viewClass: viewClass
+        viewClass: viewClass,
+        preprocessedData: preprocessedData
       }, renderView({
         viewId,
         viewClass,
