@@ -279,8 +279,9 @@ class Layout extends _react.Component {
           production,
           edition = {},
           summary = [],
-          viewId,
-          viewClass
+          // viewId,
+          viewClass,
+          viewParams = {}
         },
         context: {},
         state: {
@@ -311,7 +312,7 @@ class Layout extends _react.Component {
         this.globalScrollbar = scrollbar;
       };
 
-      const activeItem = viewId && summary.find(v => v.viewId === viewId);
+      const activeItem = viewParams.parentBlockId ? summary.find(v => v.viewId === viewParams.parentBlockId) : summary.length > 0 && summary[0];
       const locationTitle = activeItem && activeItem.routeClass !== 'landing' && activeItem.title;
       return _react.default.createElement(_CitationsProvider.default, {
         citations: citations

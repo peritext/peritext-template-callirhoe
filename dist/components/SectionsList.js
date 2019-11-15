@@ -7,18 +7,17 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _LinkProvider = _interopRequireDefault(require("./LinkProvider"));
-
 var _peritextUtils = require("peritext-utils");
 
-var _utils = require("../utils");
-
-var _ResourcePreview = _interopRequireDefault(require("./ResourcePreview"));
+var _ResourceCard = _interopRequireDefault(require("./ResourceCard"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 const SectionsList = ({
   production,
+  parentBlockId,
   options
 }) => {
   const {
@@ -38,30 +37,17 @@ const SectionsList = ({
     const nextResourceId = index < summary.length - 1 ? summary[index + 1].resourceId : undefined;
     const previousResourceId = index > 1 ? summary[index - 1].resourceId : undefined;
     const thatResource = production.resources[resourceId];
-    return _react.default.createElement("li", {
-      className: 'resource-card',
+    return _react.default.createElement(_ResourceCard.default, _extends({
       key: index
-    }, _react.default.createElement(_LinkProvider.default, {
-      to: {
-        routeClass: 'resourcePage',
-        routeParams: {
-          resourceId,
-          previousResourceId,
-          nextResourceId,
-          notesPosition,
-          displayHeader
-        }
-      }
-    }, displayThumbnail && _react.default.createElement(_ResourcePreview.default, {
-      resource: thatResource
-    }), _react.default.createElement("h2", {
-      className: 'resource-card-title'
-    }, (0, _utils.ellipse)((0, _peritextUtils.getResourceTitle)(thatResource), 100)), thatResource.metadata.authors && _react.default.createElement("p", null, thatResource.metadata.authors.map(({
-      family,
-      given
-    }, thatIndex) => _react.default.createElement("span", {
-      key: thatIndex
-    }, given, " ", family)))));
+    }, {
+      resource: thatResource,
+      previousResourceId,
+      nextResourceId,
+      displayHeader,
+      parentBlockId,
+      notesPosition,
+      displayThumbnail
+    }));
   })));
 };
 

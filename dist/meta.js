@@ -24,13 +24,14 @@ module.exports = {
     type: 'linear',
     summary: [{
       type: 'resourceSections',
+      id: 'first',
       data: {
         customSummary: {
           active: false,
           summary: []
         },
         resourceTypes: ['section'],
-        notesPosition: 'sidenotes'
+        notesPosition: 'footnotes'
       }
     }]
   },

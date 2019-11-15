@@ -5,6 +5,7 @@ const PreviewLink = ( {
   to = {},
   children,
   onButtonClick,
+  onClick,
 }, {
   navigateTo,
   activeViewId,
@@ -16,6 +17,9 @@ const PreviewLink = ( {
       onClick={ ( ) => {
         if ( typeof onButtonClick === 'function' ) {
           onButtonClick();
+        }
+        if ( typeof onClick === 'function' ) {
+          onClick();
         }
         navigateTo( to );
       } }

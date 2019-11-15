@@ -23,13 +23,14 @@ module.exports = {
       summary: [
           {
               type: 'resourceSections',
+              id: 'first',
               data: {
                 customSummary: {
                   active: false,
                   summary: []
                 },
                 resourceTypes: [ 'section' ],
-                notesPosition: 'sidenotes'
+                notesPosition: 'footnotes'
               },
           },
 
@@ -42,7 +43,7 @@ module.exports = {
         resourceTypes: [ 'glossary' ],
         customSummary: {
           active: false,
-          summary: []
+          summary: [],
         },
         notesPosition: 'footnotes',
         displayHeader: true,

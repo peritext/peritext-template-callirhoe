@@ -16,6 +16,7 @@ const Nav = ( {
   if ( !firstLink && summary.length ) {
     firstLink = summary[0];
   }
+  const onCloseNav = () => toggleIndex( false );
   return (
     <nav className={ 'nav' }>
       <div className={ 'nav-header' }>
@@ -28,7 +29,10 @@ const Nav = ( {
         <h1 className={ 'title' }>
           {
             firstLink ?
-              <LinkComponent to={ firstLink }>
+              <LinkComponent
+                onClick={ onCloseNav }
+                to={ firstLink }
+              >
                 <strong className={ 'hero-title' }>
                   {abbrevString( title )}
                 </strong>
@@ -78,7 +82,10 @@ const Nav = ( {
                   key={ index }
                   className={ `nav-item level-${item.level}` }
                 >
-                  <LinkComponent to={ item }>
+                  <LinkComponent
+                    onClick={ onCloseNav }
+                    to={ item }
+                  >
                     {item.title}
                   </LinkComponent>
                 </li>

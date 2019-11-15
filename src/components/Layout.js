@@ -280,8 +280,9 @@ class Layout extends Component {
         production,
         edition = {},
         summary = [],
-        viewId,
+        // viewId,
         viewClass,
+        viewParams = {},
       },
       context: {
 
@@ -314,8 +315,7 @@ class Layout extends Component {
     const bindGlobalScrollbarRef = ( scrollbar ) => {
       this.globalScrollbar = scrollbar;
     };
-
-    const activeItem = viewId && summary.find( ( v ) => v.viewId === viewId );
+    const activeItem = viewParams.parentBlockId ? summary.find( ( v ) => v.viewId === viewParams.parentBlockId ) : summary.length > 0 && summary[0];
     const locationTitle = activeItem && activeItem.routeClass !== 'landing' && activeItem.title;
     return (
       <CitationsProvider

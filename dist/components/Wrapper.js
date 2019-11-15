@@ -286,6 +286,7 @@ class Wrapper extends _react.Component {
             edition: this.props.edition,
             activeViewClass: viewClass,
             activeViewParams: viewParams,
+            parentBlockId: navSummary[viewNavSummaryIndex].viewId,
             options: navSummary[viewNavSummaryIndex].options
           });
 
@@ -369,6 +370,7 @@ class Wrapper extends _react.Component {
         edition: edition,
         viewId: viewId,
         viewClass: viewClass,
+        viewParams: viewParams,
         preprocessedData: preprocessedData
       }, renderView({
         viewId,
@@ -394,7 +396,8 @@ class Wrapper extends _react.Component {
     }, _react.default.createElement(_Layout.default, {
       summary: navSummary,
       production: production,
-      edition: edition
+      edition: edition,
+      viewParams: viewParams
     }, _react.default.createElement(_reactRouterDom.Switch, null, routerSummary.map((element, index) => {
       const url = routeItemToUrl(element, index);
       const summaryIndex = this.getSummaryIndex({

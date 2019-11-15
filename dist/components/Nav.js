@@ -32,6 +32,8 @@ const Nav = ({
     firstLink = summary[0];
   }
 
+  const onCloseNav = () => toggleIndex(false);
+
   return _react.default.createElement("nav", {
     className: 'nav'
   }, _react.default.createElement("div", {
@@ -44,6 +46,7 @@ const Nav = ({
   }, "\u271A")), _react.default.createElement("h1", {
     className: 'title'
   }, firstLink ? _react.default.createElement(LinkComponent, {
+    onClick: onCloseNav,
     to: firstLink
   }, _react.default.createElement("strong", {
     className: 'hero-title'
@@ -70,6 +73,7 @@ const Nav = ({
       key: index,
       className: `nav-item level-${item.level}`
     }, _react.default.createElement(LinkComponent, {
+      onClick: onCloseNav,
       to: item
     }, item.title));
   }))));

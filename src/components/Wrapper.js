@@ -266,6 +266,7 @@ export default class Wrapper extends Component {
                 edition={ this.props.edition }
                 activeViewClass={ viewClass }
                 activeViewParams={ viewParams }
+                parentBlockId={ navSummary[viewNavSummaryIndex].viewId }
                 options={ navSummary[viewNavSummaryIndex].options }
               />
               );
@@ -311,6 +312,7 @@ export default class Wrapper extends Component {
           edition={ edition }
           viewId={ viewId }
           viewClass={ viewClass }
+          viewParams={ viewParams }
           preprocessedData={ preprocessedData }
         >
           {renderView( { viewId, viewClass, viewParams, navSummary, viewNavSummaryIndex } )}
@@ -334,6 +336,7 @@ export default class Wrapper extends Component {
           summary={ navSummary }
           production={ production }
           edition={ edition }
+          viewParams={ viewParams }
         >
           <Switch>
             {

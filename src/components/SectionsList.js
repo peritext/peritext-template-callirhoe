@@ -1,18 +1,13 @@
 import React from 'react';
-import Link from './LinkProvider';
 import {
-  getResourceTitle,
   buildResourceSectionsSummary
 } from 'peritext-utils';
 
-import {
-  ellipse,
-} from '../utils';
-
-import ResourcePreview from './ResourcePreview';
+import ResourceCard from './ResourceCard';
 
 const SectionsList = ( {
   production,
+  parentBlockId,
   options,
 } ) => {
   const { notesPosition, displayThumbnail = false, displayHeader = false } = options;
@@ -26,37 +21,18 @@ const SectionsList = ( {
             const previousResourceId = index > 1 ? summary[index - 1].resourceId : undefined;
             const thatResource = production.resources[resourceId];
             return (
-              <li
-                className={ 'resource-card' }
+              <ResourceCard
                 key={ index }
-              >
-                <Link to={ {
-                  routeClass: 'resourcePage',
-                  routeParams: {
-                    resourceId,
-                    previousResourceId,
-                    nextResourceId,
-                    notesPosition,
-                    displayHeader,
-                  }
+                { ...{
+                  resource: thatResource,
+                  previousResourceId,
+                  nextResourceId,
+                  displayHeader,
+                  parentBlockId,
+                  notesPosition,
+                  displayThumbnail,
                 } }
-                >
-                  {
-                    displayThumbnail &&
-                    <ResourcePreview resource={ thatResource } />
-                  }
-                  <h2 className={ 'resource-card-title' }>{ellipse( getResourceTitle( thatResource ), 100 )}</h2>
-                  {
-                    thatResource.metadata.authors &&
-                    <p>
-                      {
-                        thatResource.metadata.authors.map( ( { family, given }, thatIndex ) =>
-                          <span key={ thatIndex }>{given} {family}</span> )
-                      }
-                    </p>
-                  }
-                </Link>
-              </li>
+              />
             );
           } )
         }

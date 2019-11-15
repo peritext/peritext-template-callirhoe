@@ -14,7 +14,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 const PreviewLink = ({
   to = {},
   children,
-  onButtonClick
+  onButtonClick,
+  onClick
 }, {
   navigateTo,
   activeViewId
@@ -24,6 +25,10 @@ const PreviewLink = ({
     onClick: () => {
       if (typeof onButtonClick === 'function') {
         onButtonClick();
+      }
+
+      if (typeof onClick === 'function') {
+        onClick();
       }
 
       navigateTo(to);
