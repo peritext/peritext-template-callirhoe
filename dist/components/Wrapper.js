@@ -105,7 +105,9 @@ const routeItemToUrl = (item, index) => {
       return `/list/${item.routeParams.elementId}`;
 
     case 'resourcePage':
-      const additional = ['previousResourceId', 'nextResourceId', 'notesPosition', 'displayHeader'].reduce((res, key) => `${res}${item.routeParams[key] ? `&${key}=${item.routeParams[key]}` : ''}`, '');
+      const additional = [
+      /*'previousResourceId', 'nextResourceId',*/
+      'notesPosition', 'displayHeader', 'viewId'].reduce((res, key) => `${res}${item.routeParams[key] ? `&${key}=${item.routeParams[key]}` : ''}`, '');
       return `/resource?resourceId=${item.routeParams.resourceId}&mode=screen${additional}`;
 
     default:
@@ -448,8 +450,8 @@ class Wrapper extends _react.Component {
         }), {});
         const {
           resourceId,
-          previousResourceId,
-          nextResourceId,
+
+          /*previousResourceId, nextResourceId,*/
           notesPosition,
           displayHeader
         } = searchParams;
@@ -457,8 +459,11 @@ class Wrapper extends _react.Component {
           viewClass: 'resourcePage',
           viewParams: {
             resourceId,
-            previousResourceId,
-            nextResourceId,
+
+            /*
+             * previousResourceId,
+             * nextResourceId,
+             */
             notesPosition,
             displayHeader
           },

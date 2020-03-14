@@ -19,8 +19,6 @@ var _Renderer = _interopRequireDefault(require("./Renderer"));
 
 var _SectionHead = _interopRequireDefault(require("./SectionHead"));
 
-var _LinkProvider = _interopRequireDefault(require("./LinkProvider"));
-
 var _ResourcePreview = _interopRequireDefault(require("./ResourcePreview"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -82,8 +80,10 @@ class Section extends _react.Component {
       }
 
       const {
-        previousResourceId,
-        nextResourceId,
+        /*
+         * previousResourceId,
+         * nextResourceId,
+         */
         notesPosition = 'footnotes',
         displayHeader = false
       } = activeViewParams;
@@ -99,9 +99,12 @@ class Section extends _react.Component {
       if (!section) {
         return;
       }
+      /*
+       * const previousResource = previousResourceId && production.resources[previousResourceId];
+       * const nextResource = nextResourceId && production.resources[nextResourceId];
+       */
 
-      const previousResource = previousResourceId && production.resources[previousResourceId];
-      const nextResource = nextResourceId && production.resources[nextResourceId];
+
       const contents = section.data && section.data.contents ? section.data.contents.contents : {
         contents: {},
         notes: {},
@@ -144,43 +147,7 @@ class Section extends _react.Component {
         onNotePointerClick: onNotePointerClick
       }) : null, _react.default.createElement("footer", {
         className: 'navigation-footer'
-      }, _react.default.createElement("ul", null, previousResource && _react.default.createElement("li", {
-        className: 'prev'
-      }, _react.default.createElement(_LinkProvider.default, {
-        to: {
-          routeClass: 'resourcePage',
-          viewId: 'nope',
-          routeParams: {
-            resourceId: previousResource.id,
-            notesPosition,
-            displayHeader
-          }
-        }
-      }, _react.default.createElement("span", {
-        className: 'navigation-item'
-      }, _react.default.createElement("span", {
-        className: 'navigation-item-arrow'
-      }, "\u2190"), _react.default.createElement("span", {
-        className: 'navigation-item-text'
-      }, (0, _peritextUtils.abbrevString)((0, _peritextUtils.getResourceTitle)(previousResource), 40))))), _react.default.createElement("li", null, _react.default.createElement("i", null, (0, _peritextUtils.abbrevString)(displayedTitle, 30), " - ", (0, _peritextUtils.abbrevString)((0, _peritextUtils.getResourceTitle)(section), 40))), nextResource && _react.default.createElement("li", {
-        className: 'next'
-      }, _react.default.createElement(_LinkProvider.default, {
-        to: {
-          routeClass: 'resourcePage',
-          viewId: 'nope',
-          routeParams: {
-            resourceId: nextResource.id,
-            notesPosition,
-            displayHeader
-          }
-        }
-      }, _react.default.createElement("span", {
-        className: 'navigation-item'
-      }, _react.default.createElement("span", {
-        className: 'navigation-item-text'
-      }, (0, _peritextUtils.abbrevString)((0, _peritextUtils.getResourceTitle)(nextResource), 40)), _react.default.createElement("span", {
-        className: 'navigation-item-arrow'
-      }, "\u2192")))))));
+      }, _react.default.createElement("ul", null, _react.default.createElement("li", null, _react.default.createElement("i", null, (0, _peritextUtils.abbrevString)(displayedTitle, 30), " - ", (0, _peritextUtils.abbrevString)((0, _peritextUtils.getResourceTitle)(section), 40))))));
     });
 
     this.state = {

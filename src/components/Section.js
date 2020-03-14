@@ -8,7 +8,7 @@ import { convertSectionToCslRecord } from '../utils';
 import NotesContainer from './NotesContainer';
 import Renderer from './Renderer';
 import SectionHead from './SectionHead';
-import InternalLink from './LinkProvider';
+// import InternalLink from './LinkProvider';
 import ResourcePreview from './ResourcePreview';
 
 class Section extends Component {
@@ -81,8 +81,11 @@ class Section extends Component {
     }
 
     const {
-      previousResourceId,
-      nextResourceId,
+
+      /*
+       * previousResourceId,
+       * nextResourceId,
+       */
       notesPosition = 'footnotes',
       displayHeader = false
     } = activeViewParams;
@@ -104,8 +107,11 @@ class Section extends Component {
     if ( !section ) {
       return;
     }
-    const previousResource = previousResourceId && production.resources[previousResourceId];
-    const nextResource = nextResourceId && production.resources[nextResourceId];
+
+    /*
+     * const previousResource = previousResourceId && production.resources[previousResourceId];
+     * const nextResource = nextResourceId && production.resources[nextResourceId];
+     */
 
     const contents = ( section.data && section.data.contents ) ?
      section.data.contents.contents : {
@@ -167,7 +173,7 @@ class Section extends Component {
            : null}
         <footer className={ 'navigation-footer' }>
           <ul>
-            {previousResource &&
+            {/*previousResource &&
             <li className={ 'prev' }>
               <InternalLink
                 to={ { routeClass: 'resourcePage', viewId: 'nope', routeParams: {
@@ -185,11 +191,11 @@ class Section extends Component {
 
               </InternalLink>
             </li>
-                }
+                */}
             <li>
               <i>{abbrevString( displayedTitle, 30 )} - {abbrevString( getResourceTitle( section ), 40 )}</i>
             </li>
-            {nextResource &&
+            {/*nextResource &&
             <li className={ 'next' }>
               <InternalLink
                 to={ { routeClass: 'resourcePage', viewId: 'nope', routeParams: {
@@ -205,7 +211,7 @@ class Section extends Component {
 
               </InternalLink>
             </li>
-                }
+               */ }
           </ul>
         </footer>
       </section>

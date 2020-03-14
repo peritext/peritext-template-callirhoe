@@ -66,7 +66,7 @@ export const routeItemToUrl = ( item, index ) => {
     case 'sectionsList':
       return `/list/${item.routeParams.elementId}`;
     case 'resourcePage':
-      const additional = [ 'previousResourceId', 'nextResourceId', 'notesPosition', 'displayHeader' ]
+      const additional = [ /*'previousResourceId', 'nextResourceId',*/ 'notesPosition', 'displayHeader', 'viewId' ]
       .reduce( ( res, key ) => `${res}${item.routeParams[key] ? `&${key}=${item.routeParams[key]}` : ''}`, '' );
       return `/resource?resourceId=${item.routeParams.resourceId}&mode=screen${additional}`;
     default:
@@ -398,13 +398,16 @@ export default class Wrapper extends Component {
                     ...result,
                     [tuple[0]]: normalizeVal( tuple[1] ),
                   } ), {} );
-                  const { resourceId, previousResourceId, nextResourceId, notesPosition, displayHeader } = searchParams;
+                  const { resourceId, /*previousResourceId, nextResourceId,*/ notesPosition, displayHeader } = searchParams;
                   return renderView( {
                     viewClass: 'resourcePage',
                     viewParams: {
                       resourceId,
-                      previousResourceId,
-                      nextResourceId,
+
+                      /*
+                       * previousResourceId,
+                       * nextResourceId,
+                       */
                       notesPosition,
                       displayHeader,
                     }, navSummary, viewNavSummaryIndex } );
