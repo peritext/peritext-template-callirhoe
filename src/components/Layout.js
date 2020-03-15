@@ -43,7 +43,7 @@ class Layout extends Component {
         indexOpen: false,
       },
       citations: this.buildCitations( props ),
-      finalCss: this.updateStyles( props, context )
+      finalCss: !props.excludeCss && this.updateStyles( props, context )
     };
     this.contextualizationElements = {};
     this.onScrollUpdate = debounce( this.onScrollUpdate, 1000 );
@@ -112,7 +112,7 @@ class Layout extends Component {
 
   updateConstants = ( props, context ) => {
     this.setState( {
-      finalCss: this.updateStyles( props, context ),
+      finalCss: !props.excludeCss && this.updateStyles( props, context ),
       citations: this.buildCitations( props )
     } );
   }
@@ -283,6 +283,7 @@ class Layout extends Component {
         // viewId,
         viewClass,
         viewParams = {},
+        excludeCss,
       },
       context: {
 
@@ -372,12 +373,16 @@ class Layout extends Component {
             />
           </section>
         }
-        <style
-          type={ 'text/css' }
-          dangerouslySetInnerHTML={ {/* eslint react/no-danger: 0 */
-            __html: finalCss
-          } }
-        />
+        {
+          !excludeCss &&
+          <style
+            type={ 'text/css' }
+            dangerouslySetInnerHTML={ {/* eslint react/no-danger: 0 */
+              __html: finalCss
+            } }
+          />
+        }
+
         <div
           dangerouslySetInnerHTML={ {/* eslint react/no-danger: 0 */
             __html: additionalHTML

@@ -352,7 +352,8 @@ class Wrapper extends _react.Component {
         edition,
         previewMode,
         useBrowserRouter = false,
-        preprocessedData
+        preprocessedData,
+        excludeCss
       },
       state: {
         viewId,
@@ -373,7 +374,8 @@ class Wrapper extends _react.Component {
         viewId: viewId,
         viewClass: viewClass,
         viewParams: viewParams,
-        preprocessedData: preprocessedData
+        preprocessedData: preprocessedData,
+        excludeCss: excludeCss
       }, renderView({
         viewId,
         viewClass,
@@ -399,7 +401,8 @@ class Wrapper extends _react.Component {
       summary: navSummary,
       production: production,
       edition: edition,
-      viewParams: viewParams
+      viewParams: viewParams,
+      excludeCss: excludeCss
     }, _react.default.createElement(_reactRouterDom.Switch, null, routerSummary.map((element, index) => {
       const url = routeItemToUrl(element, index);
       const summaryIndex = this.getSummaryIndex({
