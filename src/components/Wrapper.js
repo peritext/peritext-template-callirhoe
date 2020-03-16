@@ -292,6 +292,7 @@ export default class Wrapper extends Component {
          useBrowserRouter = false,
          preprocessedData,
          excludeCss,
+         staticRender,
        },
        state: {
         viewId,
@@ -316,6 +317,7 @@ export default class Wrapper extends Component {
           viewParams={ viewParams }
           preprocessedData={ preprocessedData }
           excludeCss={ excludeCss }
+          staticRender={ staticRender }
         >
           {renderView( { viewId, viewClass, viewParams, navSummary, viewNavSummaryIndex } )}
         </Layout>
@@ -340,6 +342,7 @@ export default class Wrapper extends Component {
           edition={ edition }
           viewParams={ viewParams }
           excludeCss={ excludeCss }
+          staticRender={ staticRender }
         >
           <Switch>
             {
