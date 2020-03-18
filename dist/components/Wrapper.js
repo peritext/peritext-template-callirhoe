@@ -88,7 +88,7 @@ const buildNav = ({
 
 exports.buildNav = buildNav;
 
-const routeItemToUrl = (item, index) => {
+const routeItemToUrl = (item = {}, index) => {
   /*
    * if nav index specified
    * and nav index is 0 then this is the landing page
@@ -102,13 +102,13 @@ const routeItemToUrl = (item, index) => {
       return '/';
 
     case 'sectionsList':
-      return `/list/${item.routeParams.elementId}`;
+      return `/list/${item.routeParams && item.routeParams.elementId}`;
 
     case 'resourcePage':
       const additional = [
       /*'previousResourceId', 'nextResourceId',*/
-      'notesPosition', 'displayHeader', 'viewId'].reduce((res, key) => `${res}${item.routeParams[key] ? `&${key}=${item.routeParams[key]}` : ''}`, '');
-      return `/resource?resourceId=${item.routeParams.resourceId}&mode=screen${additional}`;
+      'notesPosition', 'displayHeader', 'viewId'].reduce((res, key) => `${res}${item.routeParams && item.routeParams[key] ? `&${key}=${item.routeParams && item.routeParams[key]}` : ''}`, '');
+      return `/resource?resourceId=${item.routeParams && item.routeParams.resourceId}&mode=screen${additional}`;
 
     default:
       return `/${item.routeClass}/${item.viewId}`;
