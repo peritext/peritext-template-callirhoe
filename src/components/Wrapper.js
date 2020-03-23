@@ -17,7 +17,7 @@ export const getAdditionalRoutes = () => {
   return [ ];
 };
 
-export const buildNav = ( { /*production,*/ edition = {}, locale = {}, translate } ) => {
+export const buildNav = ( { /*production,*/ edition = {}, locale = {} } ) => {
     const { data = {} } = edition;
     const { plan = {} } = data;
     const { summary = [] } = plan;
@@ -29,7 +29,7 @@ export const buildNav = ( { /*production,*/ edition = {}, locale = {}, translate
                 {
                   routeClass: 'sectionsList',
                   level: 0,
-                  title: element.data.customTitle || translate( 'Selection' ),
+                  title: element.data.customTitle || locale.Selection,
                   options: element.data,
                   viewId: element.id
                 }
