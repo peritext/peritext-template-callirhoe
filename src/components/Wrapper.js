@@ -120,15 +120,7 @@ export default class Wrapper extends Component {
 
   constructor( props ) {
     super( props );
-    const { production, edition, locale } = props;
-    const summary = buildNav( { production, edition, locale, translate: this.translate } );
-    const firstEl = summary.length && summary[0];
     this.state = {
-      viewClass: props.viewClass || ( firstEl && firstEl.routeClass ) || 'landing',
-      viewId: props.viewId || ( firstEl && firstEl.viewId ),
-      viewParams: props.viewParams || ( firstEl && firstEl.routeParams ) || {},
-      viewNavSummaryIndex: 0,
-      navSummary: summary,
     };
   }
 
@@ -146,6 +138,21 @@ export default class Wrapper extends Component {
     usedDocument: this.props.usedDocument,
     getViewForResourceId: this.getViewForResourceId,
   } )
+
+  componentDidMount = () => {
+    const { props, translate } = this;
+    const { production, edition, locale } = props;
+
+    const navSummary = buildNav( { production, edition, locale, translate } );
+    const firstEl = navSummary.length && navSummary[0];
+    this.setState( {
+      navSummary,
+      viewClass: props.viewClass || ( firstEl && firstEl.routeClass ) || 'landing',
+      viewId: props.viewId || ( firstEl && firstEl.viewId ),
+      viewParams: props.viewParams || ( firstEl && firstEl.routeParams ) || {},
+      viewNavSummaryIndex: 0,
+    } );
+  }
 
   componentWillReceiveProps( nextProps ) {
     if (

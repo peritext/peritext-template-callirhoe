@@ -142,8 +142,8 @@ const renderHeadFromRouteItem = ({
 exports.renderHeadFromRouteItem = renderHeadFromRouteItem;
 
 class Wrapper extends _react.Component {
-  constructor(props) {
-    super(props);
+  constructor(_props) {
+    super(_props);
 
     _defineProperty(this, "getChildContext", () => ({
       LinkComponent: this.props.previewMode ? _PreviewLink.default : _RouterLink.default,
@@ -159,6 +159,32 @@ class Wrapper extends _react.Component {
       usedDocument: this.props.usedDocument,
       getViewForResourceId: this.getViewForResourceId
     }));
+
+    _defineProperty(this, "componentDidMount", () => {
+      const {
+        props,
+        translate
+      } = this;
+      const {
+        production,
+        edition,
+        locale
+      } = props;
+      const navSummary = buildNav({
+        production,
+        edition,
+        locale,
+        translate
+      });
+      const firstEl = navSummary.length && navSummary[0];
+      this.setState({
+        navSummary,
+        viewClass: props.viewClass || firstEl && firstEl.routeClass || 'landing',
+        viewId: props.viewId || firstEl && firstEl.viewId,
+        viewParams: props.viewParams || firstEl && firstEl.routeParams || {},
+        viewNavSummaryIndex: 0
+      });
+    });
 
     _defineProperty(this, "translate", key => {
       const {
@@ -297,25 +323,7 @@ class Wrapper extends _react.Component {
       }
     });
 
-    const {
-      production,
-      edition,
-      locale: _locale
-    } = props;
-    const summary = buildNav({
-      production,
-      edition,
-      locale: _locale,
-      translate: this.translate
-    });
-    const firstEl = summary.length && summary[0];
-    this.state = {
-      viewClass: props.viewClass || firstEl && firstEl.routeClass || 'landing',
-      viewId: props.viewId || firstEl && firstEl.viewId,
-      viewParams: props.viewParams || firstEl && firstEl.routeParams || {},
-      viewNavSummaryIndex: 0,
-      navSummary: summary
-    };
+    this.state = {};
   }
 
   componentWillReceiveProps(nextProps) {
