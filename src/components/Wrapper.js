@@ -64,7 +64,7 @@ export const routeItemToUrl = ( item = {}, index ) => {
     case 'landing':
       return '/';
     case 'sectionsList':
-      return `/list/${item.routeParams && item.routeParams.elementId}`;
+      return `/list/${item.routeParams && item.routeParams.elementId ? item.routeParams.elementId : ''}`;
     case 'resourcePage':
       const additional = [ /*'previousResourceId', 'nextResourceId',*/ 'notesPosition', 'displayHeader', 'viewId' ]
       .reduce( ( res, key ) => `${res}${item.routeParams && item.routeParams[key] ? `&${key}=${item.routeParams && item.routeParams[key]}` : ''}`, '' );
@@ -120,7 +120,17 @@ export default class Wrapper extends Component {
 
   constructor( props ) {
     super( props );
+
+    const { production, edition, locale } = props;
+
+    const navSummary = buildNav( { production, edition, locale } );
+    const firstEl = navSummary.length && navSummary[0];
     this.state = {
+      navSummary,
+      viewClass: props.viewClass || ( firstEl && firstEl.routeClass ) || 'landing',
+      viewId: props.viewId || ( firstEl && firstEl.viewId ),
+      viewParams: props.viewParams || ( firstEl && firstEl.routeParams ) || {},
+      viewNavSummaryIndex: 0,
     };
   }
 
@@ -138,21 +148,6 @@ export default class Wrapper extends Component {
     usedDocument: this.props.usedDocument,
     getViewForResourceId: this.getViewForResourceId,
   } )
-
-  componentDidMount = () => {
-    const { props, translate } = this;
-    const { production, edition, locale } = props;
-
-    const navSummary = buildNav( { production, edition, locale, translate } );
-    const firstEl = navSummary.length && navSummary[0];
-    this.setState( {
-      navSummary,
-      viewClass: props.viewClass || ( firstEl && firstEl.routeClass ) || 'landing',
-      viewId: props.viewId || ( firstEl && firstEl.viewId ),
-      viewParams: props.viewParams || ( firstEl && firstEl.routeParams ) || {},
-      viewNavSummaryIndex: 0,
-    } );
-  }
 
   componentWillReceiveProps( nextProps ) {
     if (
@@ -337,7 +332,7 @@ export default class Wrapper extends Component {
      * If first view is not landing
      * then we double it to allow internal links
      */
-    if ( routerSummary.length && routerSummary[0].routeClass !== 'landing' ) {
+    if ( routerSummary.length && routerSummary[0].viewClass !== 'landing' ) {
       routerSummary = [ routerSummary[0], ...routerSummary ];
     }
 
@@ -355,8 +350,7 @@ export default class Wrapper extends Component {
             {
             routerSummary.map( ( element, index ) => {
               const url = routeItemToUrl( element, index );
-
-              const summaryIndex = this.getSummaryIndex( { routeClass: element.routeClass, routeParams: element.routeParams, viewId: element.viewId } );
+              const summaryIndex = this.getSummaryIndex( { routeClass: element.viewClass, routeParams: element.routeParams, viewId: element.viewId } );
               return (
                 <Route
                   exact
@@ -379,7 +373,7 @@ export default class Wrapper extends Component {
                     return renderView( {
                           viewClass: element.routeClass,
                           viewParams: {
-                            ...element.routeParams,
+                            ...element.viewParams,
                             ...additionalRouteParams,
                           },
                           navSummary,
